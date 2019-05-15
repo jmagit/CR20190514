@@ -35,6 +35,14 @@ public class City implements Serializable {
 
 	public City() {
 	}
+	
+
+	public City(int cityId, String city, Country country) {
+		this.cityId = cityId;
+		this.city = city;
+		this.country = country;
+	}
+
 
 	public int getCityId() {
 		return this.cityId;

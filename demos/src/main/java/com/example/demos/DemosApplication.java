@@ -1,5 +1,7 @@
 package com.example.demos;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +13,8 @@ import org.springframework.context.annotation.Bean;
 import com.example.demos.ioc.Educada;
 import com.example.demos.ioc.Linea;
 import com.example.demos.ioc.Punto;
+import com.example.demos.model.Country;
+import com.example.demos.repositories.CountryRepository;
 
 @SpringBootApplication
 public class DemosApplication implements CommandLineRunner{
@@ -38,8 +42,17 @@ public class DemosApplication implements CommandLineRunner{
 	@Value("${mi.valor}")
 	private String cotilla;
 
+	@Autowired
+	private CountryRepository dao;
+	
 	@Override
 	public void run(String... args) throws Exception {
+		Optional<Country> rslt = dao.findById(10);
+		if( rslt.isPresent())
+			System.out.println(rslt.get().getCountry());
+	}
+
+	public void demoIOC(String... args) throws Exception {
 		System.out.println(linea);
 		System.out.println(punto);
 		punto.setX(10);
