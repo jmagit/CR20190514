@@ -2,6 +2,8 @@ package com.example.demos.model.dto;
 
 import java.io.Serializable;
 
+import javax.validation.Valid;
+
 import com.example.demos.model.City;
 import com.example.demos.model.Country;
 
@@ -22,7 +24,7 @@ public class CityDTO implements Serializable {
 				source.getCity(), 
 				source.getCountry() == null ? -1 : source.getCountry().getCountryId());
 	}
-	public static City from(CityDTO source) {
+	public static City from(@Valid CityDTO source) {
 		return new City(source.getCityId(), 
 				source.getCity(), 
 				source.getCountryId() == -1 ? null: new Country(source.getCountryId(), null));

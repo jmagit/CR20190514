@@ -2,8 +2,11 @@ package com.example.demos.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 import javax.validation.constraints.Size;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -96,5 +99,16 @@ public class Country implements Serializable {
 	public String toString() {
 		return "Country [countryId=" + countryId + ", country=" + country + "]";
 	}
+	@Autowired
+	@Transient
+	private Validator validator;
+
+	public boolean isValid() {
+//		ConstraintViolation<Country> constraintViolations =  (ConstraintViolation<Country>) validator.validate( this );
+//		return constraintViolations.
+		return true;
+	}
+	
+
 
 }
