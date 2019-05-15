@@ -35,7 +35,7 @@ public class DemosApplication implements CommandLineRunner{
 	@Autowired 
 	private Linea linea;
 	
-	@Value("${spring.datasource.url}")
+	@Value("${mi.valor}")
 	private String cotilla;
 
 	@Override

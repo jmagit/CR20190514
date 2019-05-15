@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="kk">
+		<class>com.example.demos.model.Actor</class>
+		<class>com.example.demos.model.Address</class>
+		<class>com.example.demos.model.Category</class>
+		<class>com.example.demos.model.City</class>
+		<class>com.example.demos.model.Country</class>
+		<class>com.example.demos.model.Customer</class>
+		<class>com.example.demos.model.Film</class>
+		<class>com.example.demos.model.FilmActor</class>
+		<class>com.example.demos.model.FilmActorPK</class>
+		<class>com.example.demos.model.FilmCategory</class>
+		<class>com.example.demos.model.FilmCategoryPK</class>
+		<class>com.example.demos.model.FilmText</class>
+		<class>com.example.demos.model.Inventory</class>
+		<class>com.example.demos.model.Language</class>
+		<class>com.example.demos.model.Payment</class>
+		<class>com.example.demos.model.Rental</class>
+		<class>com.example.demos.model.Staff</class>
+		<class>com.example.demos.model.Store</class>
+	</persistence-unit>
+</persistence>
