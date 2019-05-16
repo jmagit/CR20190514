@@ -29,6 +29,9 @@ import com.example.demos.repositories.CityRepository;
 import com.example.demos.repositories.CountryRepository;
 import com.example.demos.services.contract.CityService;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+@EnableSwagger2
 @SpringBootApplication
 public class DemosApplication implements CommandLineRunner{
 
@@ -36,10 +39,6 @@ public class DemosApplication implements CommandLineRunner{
 		SpringApplication.run(DemosApplication.class, args);
 	}
 	
-	@Bean
-	public Punto myPunto() {
-		return new Punto(2,1);
-	}
 	@Autowired
 	private Punto punto;
 	@Autowired

@@ -2,6 +2,7 @@ package com.example.demos.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,6 +23,7 @@ public class City implements Serializable {
 	@Column(name="city_id")
 	private int cityId;
 
+	@Size(min=2, max=50)
 	private String city;
 
 	@Column(name="last_update")

@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+import com.example.demos.exceptions.NotFoundException;
 import com.example.demos.model.City;
 import com.example.demos.repositories.CityRepository;
 import com.example.demos.services.contract.CityService;
@@ -28,13 +30,13 @@ public class CityServiceImpl implements CityService {
 	@Override
 	public void add(City item) throws Exception {
 		if(get(item.getCityId()).isPresent())
-			throw new Exception("Ya existe");
+			throw new DuplicateKeyException("Ya existe");
 		dao.save(item);
 	}
 	@Override
 	public void modify(City item) throws Exception {
 		if(!get(item.getCityId()).isPresent())
-			throw new Exception("Elemento no encontrado");
+			throw new NotFoundException("Elemento no encontrado");
 		dao.save(item);
 	}
 	@Override
