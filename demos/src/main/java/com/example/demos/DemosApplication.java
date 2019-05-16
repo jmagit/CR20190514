@@ -1,7 +1,11 @@
 package com.example.demos;
 
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Stream;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 
 import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jca.cci.core.support.CciDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import com.example.demos.ioc.Educada;
 import com.example.demos.ioc.Linea;
@@ -22,6 +27,7 @@ import com.example.demos.model.Country;
 import com.example.demos.model.dto.CityDTO;
 import com.example.demos.repositories.CityRepository;
 import com.example.demos.repositories.CountryRepository;
+import com.example.demos.services.contract.CityService;
 
 @SpringBootApplication
 public class DemosApplication implements CommandLineRunner{
@@ -52,30 +58,49 @@ public class DemosApplication implements CommandLineRunner{
 	@Autowired
 	private CountryRepository dao, dao2;
 	@Autowired
-	private CityRepository cityDao;
+	private CityService citySrv;
 	
+//  @Bean
+//  public javax.validation.Validator localValidatorFactoryBean() {
+//    return new LocalValidatorFactoryBean();
+//  }	
+	@Autowired
+	//@Transient
+	private Validator validator;
+
+	public boolean isValid(Country c) {
+		Set<ConstraintViolation<Country>> constraintViolations =  validator.validate( c );
+		return constraintViolations.size() == 0;
+//		return false;
+	}
+
 	@Override
 	public void run(String... args) throws Exception {
-		Optional<Country> rslt = dao.findById(10);
-		if( rslt.isPresent())
-			System.out.println(rslt.get().getCountry());
-		Stream<Country> lst = dao.findByCountryStartingWithOrderByCountryDesc("S").stream();
-		
-		lst.forEach(item -> System.out.println(item.getCountry()));
-		
-		Stream<CityDTO> cc = cityDao.findAll().stream().map(item -> CityDTO.from(item));
-		cc.forEach(item -> System.out.println(item));
-		
-//		City city = CityDTO.from(new CityDTO());
-//		Country country = new Country(1111, null);
-//		country.isValid();
-//		dao.save(country);
-		try {
-//			miTrn();
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
+//		Optional<Country> rslt = dao.findById(10);
+//		if( rslt.isPresent())
+//			System.out.println(rslt.get().getCountry());
+//		Stream<Country> lst = dao.findByCountryStartingWithOrderByCountryDesc("S").stream();
+//		
+//		lst.forEach(item -> System.out.println(item.getCountry()));
+//		
+//		Stream<CityDTO> cc = citySrv.getAll().stream().map(item -> CityDTO.from(item));
+//		cc.forEach(item -> System.out.println(item));
+//		
+////		City city = CityDTO.from(new CityDTO());
+//		Country country = new Country(1111, "1");
+////		if(country.validate())
+//		if(isValid(country))
+//			System.out.println("VALIDO");
+//		else {
+//			System.out.println("INVALIDO");
+//		}
+////		dao.save(country);
+//		try {
+////			miTrn();
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//		
 	}
 
 	@Transactional

@@ -4,15 +4,16 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -28,7 +29,7 @@ public class Country implements Serializable {
 	@Column(name="country_id")
 	private int countryId;
 
-	@NonNull
+	@NotNull
 	@Size(min=2, max = 50)
 	private String country;
 
@@ -99,15 +100,15 @@ public class Country implements Serializable {
 	public String toString() {
 		return "Country [countryId=" + countryId + ", country=" + country + "]";
 	}
-	@Autowired
-	@Transient
-	private Validator validator;
-
-	public boolean isValid() {
-//		ConstraintViolation<Country> constraintViolations =  (ConstraintViolation<Country>) validator.validate( this );
-//		return constraintViolations.
-		return true;
-	}
+//	@Autowired
+//	@Transient
+//	private Validator validator;
+//
+//	public boolean validate() {
+//		Set<ConstraintViolation<Country>> constraintViolations =  validator.validate( this );
+//		return constraintViolations.size() == 0;
+////		return true;
+//	}
 	
 
 

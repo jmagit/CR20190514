@@ -54,6 +54,7 @@
 			<artifactId>jackson-dataformat-xml</artifactId>
 		</dependency>
 
+		
 	</dependencies>
 
 	<build>

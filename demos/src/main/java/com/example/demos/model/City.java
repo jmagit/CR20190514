@@ -2,6 +2,9 @@ package com.example.demos.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -26,6 +29,7 @@ public class City implements Serializable {
 
 	//bi-directional many-to-one association to Address
 	@OneToMany(mappedBy="city")
+	@JsonIgnore
 	private List<Address> addresses;
 
 	//bi-directional many-to-one association to Country
