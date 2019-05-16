@@ -1,5 +1,6 @@
 package com.example.demos.resources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collector;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import com.example.demos.model.City;
 import com.example.demos.model.Country;
@@ -44,9 +47,13 @@ public class CityResource {
 		throw new Exception("no encontrado");
 	}
 	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)
-	public void create(@RequestBody CityDTO item) throws Exception {
-		srv.add(CityDTO.from(item));
+//	@ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity<Object> create(@RequestBody CityDTO item) throws Exception {
+		City newItem = CityDTO.from(item);
+		srv.add(newItem);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(newItem.getCityId()).toUri();
+		return ResponseEntity.created(location).build();
 	}
 	@PutMapping(path = "/{id}")
 	@ResponseStatus(HttpStatus.OK)
