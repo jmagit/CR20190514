@@ -2,6 +2,9 @@ package com.example.demos.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.example.demos.model.projections.ClienteCompleto;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.sql.Timestamp;
